@@ -1,3 +1,23 @@
+## Introduction
+
+This repo aims to iteratively build and refine a fine-tuned LLM for domain name suggestion.
+
+A domain name has to satisfy the following criteria:
+
+1. Relevance & Clarity
+2. Simplicity & Memorability
+3. ASCII-only, avoid numbers hypens
+4. Succint: Length <= 15
+5. Audience and Culture Fit
+6. Safety & Compliance 
+
+
+## HyperParameters
+
+MAX_NEW_TOKENS = 420
+
+TEMPERATURE    = 0.7
+TOP_P          = 0.92
 
 ## Intermediate Training Results
 
