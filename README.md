@@ -22,13 +22,18 @@ MIN_NEW_TOKENS = 150
 
 TEMPERATURE    = 0.7
 
+decides the diversity of response
+
 TOP_P          = 0.92
 
-
+REPETITION_PENALTY = 1.05
 
 ## Training
 
 I utilize QLoRA SfT and trained for 2-3 epochs. Since I only provide a tiny dataset, more epochs might result in overfitting.  
+
+Requiring the exact number of suggestions would be more helpful than requiring more than certain amount, due to the nature of prompt engineering. 
+
 
 ## Intermediate Training Results
 
@@ -52,6 +57,9 @@ When r = 32,  lr = 8e-5, epochs = 3,
 |1         |	No log  | 	1.584584|
 |2         |	No log	|   1.460789|
 |3         |	No log	|   1.413446|
+
+Download my model at https://huggingface.co/GeorgesMiradaHas/domain-suggester-qwen25-3b/
+
 
 ## Incorrect Format Guardrail
 
