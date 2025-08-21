@@ -14,10 +14,21 @@ A domain name has to satisfy the following criteria:
 
 ## HyperParameters
 
-MAX_NEW_TOKENS = 420
+MAX_NEW_TOKENS = 480
+
+This is maximum number of tokens the model is allowed to add
+
+MIN_NEW_TOKENS = 150
 
 TEMPERATURE    = 0.7
+
 TOP_P          = 0.92
+
+
+
+## Training
+
+I utilize QLoRA SfT and trained for 2-3 epochs. Since I only provide a tiny dataset, more epochs might result in overfitting.  
 
 ## Intermediate Training Results
 
@@ -41,3 +52,19 @@ When r = 32,  lr = 8e-5, epochs = 3,
 |1         |	No log  | 	1.584584|
 |2         |	No log	|   1.460789|
 |3         |	No log	|   1.413446|
+
+## Incorrect Format Guardrail
+
+There is a JSON Guard against non-JSON, truncated JSON, wrong keys.
+
+## Harmful Content Refusal
+
+The LLM inherent capacity enables identification of harmful content. It attaches reason of refusal in returning response. 
+Categories refused include:
+1. Hate/harassment,
+2. Extremist content,
+3. illegal goods/services,
+4. Sexual content (esp. minors),
+5. Self-harm,
+6. medical/financial deception,
+7. phishing/impersonation, doxxing/PII
