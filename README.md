@@ -9,7 +9,7 @@ A domain name has to satisfy the following criteria:
 3. ASCII-only, avoid numbers hypens
 4. Succint: Length <= 15
 5. Audience and Culture Fit
-6. Safety & Compliance 
+6. Safety & Compliance: no trademark violation, no promotion of crime, self-harm or extremism
 
 
 ## HyperParameters
@@ -33,6 +33,7 @@ REPETITION_PENALTY = 1.05
 I utilize QLoRA SfT and trained for 2-3 epochs. Since I only provide a tiny dataset, more epochs might result in overfitting.  
 
 Requiring the exact number of suggestions would be more helpful than requiring more than certain amount, due to the nature of prompt engineering. 
+
 
 
 ## Intermediate Training Results
@@ -59,6 +60,28 @@ When r = 32,  lr = 8e-5, epochs = 3,
 |3         |	No log	|   1.413446|
 
 Download my model at https://huggingface.co/GeorgesMiradaHas/domain-suggester-qwen25-3b/
+
+## Evalaution
+
+Our Evaluation concerns a variety of domain topics.
+
+Edge case cover usage of emojis, extraordinary length requirement
+
+Underperformance Cases:
+
+1. Parse Error
+This is the most common type of error that model output is invalid json format.
+
+2. Overeaction on Security
+e.g. Amboise Psychologist Clinic,
+refusal for 'personal information leekage'
+
+
+2. Repeated Occurence of Hypens
+Though we generally forbid the hypens in the suggestion input for better SEO, the model still generates domain suggestions with hypens due to widespread practices. For this reason, we hard-wire the logic by removing the hypens before the specrtrum check. 
+
+e.g. Central Public Hospital, receives:
+refusal for 'too_long'
 
 
 ## Incorrect Format Guardrail
