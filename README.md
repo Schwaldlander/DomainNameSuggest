@@ -11,6 +11,12 @@ A domain name has to satisfy the following criteria:
 5. Audience and Culture Fit
 6. Safety & Compliance: no trademark violation, no promotion of crime, self-harm or extremism
 
+## My pipeline
+
+1. Formulate the basic model structure and training module
+2. Run Evaluation, Observe and make necessary adaptations
+3. Refine the training process
+
 
 ## HyperParameters
 
@@ -71,17 +77,23 @@ Underperformance Cases:
 
 1. Parse Error
 This is the most common type of error that model output is invalid json format.
+Besides, im_end symbol still persists. 
 
 2. Overeaction on Security
 e.g. Amboise Psychologist Clinic,
 refusal for 'personal information leekage'
 
 
-2. Repeated Occurence of Hypens
+3. Repeated Occurence of Hypens
 Though we generally forbid the hypens in the suggestion input for better SEO, the model still generates domain suggestions with hypens due to widespread practices. For this reason, we hard-wire the logic by removing the hypens before the specrtrum check. 
-
 e.g. Central Public Hospital, receives:
 refusal for 'too_long'
+
+4. Capital Letter suggestion
+Domain names are case insensitive, however, to conform with format, we lower all letters in the domain name.
+5. Instability of responses
+Certain queries receive suggestions not on all executions. 
+7. 
 
 
 ## Incorrect Format Guardrail
