@@ -122,34 +122,18 @@ Besides, irregular symbol such as im_end still persists.
 **Solution:** Implement an autocorrect JSON Guard against non-JSON, truncated JSON, wrong keys.
  
 
-3. Overeaction on Security
+2. Inappropriate reaction on Security
+
+
+1) Qwen diisplays over security.
 e.g. Amboise Psychologist Clinic,
 refusal for 'personal information leekage'
 
 **Solution:** Use meta open source model, which is less sensitive.
 
+2) Meta-llama fails to refuse adult content
 
-4. Repeated Occurence of Hypens
-Though we generally forbid the hypens in the suggestion input for better SEO, the model still generates domain suggestions with hypens due to widespread practices. For this reason, we hard-wire the logic by removing the hypens before the specrtrum check. 
-e.g. Central Public Hospital, receives:
-refusal for 'too_long'
-
-**Solution:** Meta model performs better in avoiding hypens as well. In case of hypen/space appearance, we can force remove such tokens.
-
-6. Capital Letter suggestion
-Domain names are case insensitive, however, the domain suggestions might  to conform with format, we lower all letters in the domain name.
-
-**Solution:** not vital issue
-7. Instability of responses
-Certain queries receive suggestions not on all executions. This is evident when model.eval() is not activated.
-
-**Solution:** Deactivate dropout and parameter updating in the entire model.
-9. 
-
-
-
-
-## Harmful Content Refusal
+Clarify **Harmful Content Refusal** policy, filter out prior to prompt.
 
 The LLM inherent capacity enables identification of harmful content. It attaches reason of refusal in returning response. 
 Categories refused include:
@@ -160,3 +144,26 @@ Categories refused include:
 5. Self-harm,
 6. medical/financial deception,
 7. phishing/impersonation, doxxing/PII
+
+3. Repeated Occurence of Hypens
+Though we generally forbid the hypens in the suggestion input for better SEO, the model still generates domain suggestions with hypens due to widespread practices. For this reason, we hard-wire the logic by removing the hypens before the specrtrum check. 
+e.g. Central Public Hospital, receives:
+refusal for 'too_long'
+
+**Solution:** Meta model performs better in avoiding hypens as well. In case of hypen/space appearance, we can force remove such tokens.
+
+4. Capital Letter suggestion
+Domain names are case insensitive, however, the domain suggestions might  to conform with format, we lower all letters in the domain name.
+
+**Solution:** not vital issue
+
+5. Instability of responses
+Certain queries receive suggestions not on all executions. This is evident when model.eval() is not activated.
+
+**Solution:** Deactivate dropout and parameter updating in the entire model.
+9. 
+
+
+
+
+
