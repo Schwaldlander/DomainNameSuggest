@@ -1,6 +1,6 @@
 
 # Technical Report 
-### My experiments
+
 
 ## Introduction
 
@@ -89,7 +89,9 @@ When r = 32,  lr = 8e-5, epochs = 3,
 |2         |	No log	|   1.460789|
 |3         |	No log	|   1.413446|
 
+### SfT vs DPO
 
+We find that with similar dataset generation techniques, SfT performs on par with DPO. Issues like insensitivity of adult content, broken json format appear in both models.
 
 ## Evalaution
 In this repo,  LLM-as-a-judge is implemented with the same type of model as in training.
@@ -115,28 +117,37 @@ Edge case cover usage of emojis, extraordinary length requirement.
 
 1. Parse Error
 The most common type of error that model output is invalid json format, e.g. brackets{([ fail to match or close.
-Besides, irregular symbol such as im_end still persists . 
+Besides, irregular symbol such as im_end still persists.
 
-2. Overeaction on Security
+**Solution:** Implement an autocorrect JSON Guard against non-JSON, truncated JSON, wrong keys.
+ 
+
+3. Overeaction on Security
 e.g. Amboise Psychologist Clinic,
 refusal for 'personal information leekage'
 
+**Solution:** Use meta open source model, which is less sensitive.
 
-3. Repeated Occurence of Hypens
+
+4. Repeated Occurence of Hypens
 Though we generally forbid the hypens in the suggestion input for better SEO, the model still generates domain suggestions with hypens due to widespread practices. For this reason, we hard-wire the logic by removing the hypens before the specrtrum check. 
 e.g. Central Public Hospital, receives:
 refusal for 'too_long'
 
-4. Capital Letter suggestion
+**Solution:** Meta model performs better in avoiding hypens as well. In case of hypen/space appearance, we can force remove such tokens.
+
+6. Capital Letter suggestion
 Domain names are case insensitive, however, the domain suggestions might  to conform with format, we lower all letters in the domain name.
-5. Instability of responses
+
+**Solution:** not vital issue
+7. Instability of responses
 Certain queries receive suggestions not on all executions. This is evident when model.eval() is not activated.
-7. 
+
+**Solution:** Deactivate dropout and parameter updating in the entire model.
+9. 
 
 
-## Incorrect Format Guardrail
 
-There is a JSON Guard against non-JSON, truncated JSON, wrong keys.
 
 ## Harmful Content Refusal
 
