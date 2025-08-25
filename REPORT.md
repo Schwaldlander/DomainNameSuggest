@@ -134,7 +134,8 @@ Besides, irregular symbol such as im_end still persists.
     
     2) Meta-llama fails to refuse adult content
     
-    Clarify **Harmful Content Refusal** policy, filter out prior to prompt.
+    Clarify **Harmful Content Refusal** policy, filter out prior to prompt. [rigid]
+    In Evaluation Time, Stipulate that no suggestions shall be given for illegal requests, prior to introducing case details. [adaptive]
     
     The LLM inherent capacity enables identification of harmful content. It attaches reason of refusal in returning response. 
     Categories refused include:
@@ -167,7 +168,7 @@ Certain queries receive suggestions not on all executions. This is evident when 
 
 Some domain suggestions include health.io, online.ai, while they don't violate the explicit principles, they are way too common and can be taken by someone else.
 
-**Solution:** Add uniqueness requirement in prompts
+**Solution:** Add uniqueness requirement in evaluation prompts
 
 
 
