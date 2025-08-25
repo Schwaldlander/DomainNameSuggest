@@ -1,0 +1,32 @@
+# Seeds to drive synthetic dataset diversity
+simple:
+  - "Artisanal coffee shop in Lisbon"
+  - "Handmade jewelry boutique selling minimalist silver rings"
+  - "Local dog grooming service for small breeds"
+  - "Yoga studio specializing in prenatal classes"
+  - "Eco-friendly household cleaning brand"
+  - "Neighborhood bakery focusing on sourdough"
+
+tech:
+  - "SaaS platform for invoice automation for freelancers"
+  - "AI-powered customer support chatbot for e-commerce"
+  - "Cybersecurity consultancy for small businesses"
+  - "Open-source devtools for feature flagging"
+  - "Mobile app for personal budgeting and expense tracking"
+
+professional:
+  - "Family-owned dental clinic"
+  - "Boutique law firm specializing in startups"
+  - "Tax advisory for digital nomads"
+  - "Architecture studio focusing on passive houses"
+
+creative:
+  - "Wedding photography services in Paris"
+  - "Motion design studio for tech brands"
+  - "Indie game development micro-studio"
+
+complex:
+  - "Online marketplace connecting local farmers to restaurants"
+  - "Climate-tech startup offering satellite-based crop analytics"
+  - "Healthtech platform enabling remote physiotherapy programs"
+  - "B2B logistics optimizer for same-day urban deliveries"

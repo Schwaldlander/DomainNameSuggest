@@ -1,0 +1,15 @@
+{
+  "positives": 1200,
+  "refusals": 42,
+  "negatives": 1200,
+  "tlds": [
+    ".com",
+    ".io",
+    ".co",
+    ".ai",
+    ".app"
+  ],
+  "seed": 42,
+  "sft_hash": "ff0d02087ce9",
+  "neg_hash": "a4013346d353"
+}

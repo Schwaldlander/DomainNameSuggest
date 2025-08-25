@@ -1,0 +1,8 @@
+  0% 0/36 [00:00<?, ?it/s]`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+100% 36/36 [1:29:31<00:00, 149.20s/it]
+{'loss': 1.5583, 'grad_norm': 0.0, 'learning_rate': 0.000179801722728024, 'num_tokens': 145087.0, 'mean_token_accuracy': 0.7614752531051636, 'epoch': 0.56}
+{'loss': 1.5671, 'grad_norm': 0.0, 'learning_rate': 0.0001, 'num_tokens': 287398.0, 'mean_token_accuracy': 0.75829874337474, 'epoch': 1.11}
+{'loss': 1.5539, 'grad_norm': 0.0, 'learning_rate': 2.0198277271976052e-05, 'num_tokens': 430709.0, 'mean_token_accuracy': 0.7609218187630177, 'epoch': 1.67}
+{'train_runtime': 5449.0574, 'train_samples_per_second': 0.105, 'train_steps_per_second': 0.007, 'train_loss': 1.5597702397240534, 'num_tokens': 516518.0, 'mean_token_accuracy': 0.7600894050395235, 'epoch': 2.0}
+Saving...
+Done.

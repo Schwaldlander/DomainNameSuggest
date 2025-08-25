@@ -1,0 +1,8 @@
+{
+  "temperature": 0.45,
+  "top_p": 0.85,
+  "repetition_penalty": 1.1,
+  "max_new_tokens": 192,
+  "do_sample": true,
+  "num_return_sequences": 1
+}

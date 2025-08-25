@@ -1,0 +1,40 @@
+{
+  "base_model": "meta-llama/Llama-3.2-3B-Instruct",
+  "config": {
+    "num_train_epochs": 2,
+    "per_device_train_batch_size": 2,
+    "gradient_accumulation_steps": 8,
+    "learning_rate": 0.0002,
+    "lr_scheduler_type": "cosine",
+    "warmup_ratio": 0.03,
+    "weight_decay": 0.0,
+    "logging_steps": 10,
+    "save_steps": 200,
+    "max_steps": -1,
+    "max_seq_length": 2048,
+    "packing": true,
+    "gradient_checkpointing": true,
+    "lora": {
+      "r": 16,
+      "lora_alpha": 32,
+      "lora_dropout": 0.05,
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "gate_proj",
+        "up_proj",
+        "down_proj"
+      ]
+    },
+    "quantization": "bnb_4bit"
+  },
+  "train_jsonl": "data/synthetic/sft_dataset.jsonl",
+  "include_kinds": [
+    "positive",
+    "refusal"
+  ],
+  "timestamp": 1756051289,
+  "hash": "fd8f929c862a"
+}

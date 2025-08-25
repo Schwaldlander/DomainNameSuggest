@@ -1,0 +1,16 @@
+# Full fine-tuning — slower & heavier
+train:
+  num_train_epochs: 1
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 16
+  learning_rate: 1.5e-5
+  lr_scheduler_type: cosine
+  warmup_ratio: 0.03
+  weight_decay: 0.0
+  logging_steps: 10
+  save_steps: 200
+  max_steps: -1
+  max_seq_length: 2048
+  packing: true
+  gradient_checkpointing: true
+  quantization: null

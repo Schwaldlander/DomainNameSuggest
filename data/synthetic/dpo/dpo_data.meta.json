@@ -1,0 +1,51 @@
+{
+  "count": 848,
+  "hash": "111ec448eb8a",
+  "tlds": [
+    ".com",
+    ".io",
+    ".co",
+    ".ai",
+    ".app",
+    ".net",
+    ".org"
+  ],
+  "dpo_pairs": {
+    "business": 800,
+    "refusal": 48
+  },
+  "schema": {
+    "format": "dpo",
+    "fields": [
+      "system",
+      "prompt",
+      "chosen",
+      "rejected",
+      "scores",
+      "meta"
+    ],
+    "scores": {
+      "aggregate_range": [
+        0.0,
+        1.0
+      ],
+      "per_domain": {
+        "checks": [
+          "has_tld",
+          "length_ok",
+          "no_space",
+          "no_underscore",
+          "no_emoji",
+          "no_digits",
+          "no_hyphen",
+          "letters_only",
+          "tld",
+          "root_len"
+        ],
+        "subscores": [
+          "tld_pref_score"
+        ]
+      }
+    }
+  }
+}
