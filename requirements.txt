@@ -1,0 +1,23 @@
+# core
+torch>=2.2.0
+transformers>=4.41.0
+accelerate>=0.30.0
+datasets>=2.19.0
+trl>=0.9.6
+peft>=0.11.0
+sentencepiece>=0.1.99
+bitsandbytes>=0.43.1
+
+# evaluation & utils
+numpy>=1.26.0
+scikit-learn>=1.4.0
+pyyaml>=6.0.1
+regex>=2024.5.15
+
+# reranker & embeddings
+sentence-transformers>=2.7.0
+
+# api
+fastapi>=0.111.0
+uvicorn>=0.30.0
+pydantic>=2.7.0
