@@ -44,25 +44,26 @@ The **pipeline** is as follows:
 3. Observe and make necessary adaptations
 4. Refine the training process
 
+Particularly, v2 feeds more examples than v1, and the model output becomes more satisfying.
 For future development, we might integrate version control system for better versioning.
 
 ### HyperParameters
 
-MAX_NEW_TOKENS = 480
+MAX_NEW_TOKENS
 
-This is maximum number of tokens the model is allowed to add
+This is maximum number of tokens the model is allowed to add, usually below 200.
 
-MIN_NEW_TOKENS = 150
-
-TEMPERATURE    = 0.7
+TEMPERATURE    = 0.45
 
 decides the diversity of response
 
 TOP_P          = 0.92
 
+selects the items with possibilities that equal or exceed this value
+
 REPETITION_PENALTY = 1.05
 
-
+avoid autoregressive failure
 
 
 
@@ -161,9 +162,12 @@ Domain names are case insensitive, however, the domain suggestions might  to con
 Certain queries receive suggestions not on all executions. This is evident when model.eval() is not activated.
 
 **Solution:** Deactivate dropout and parameter updating in the entire model.
-9. 
 
+6. Generic Suggestion
 
+Some domain suggestions include health.io, online.ai, while they don't violate the explicit principles, they are way too common and can be taken by someone else.
+
+**Solution:** Add uniqueness requirement in prompts
 
 
 
