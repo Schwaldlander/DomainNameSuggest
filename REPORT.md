@@ -1,3 +1,7 @@
+
+# Technical Report 
+### My experiments
+
 ## Introduction
 
 This repo aims to iteratively build and refine a fine-tuned LLM for domain name suggestion.
@@ -12,8 +16,14 @@ A domain name has to satisfy the following criteria:
 6. Safety & Compliance: no trademark violation, no promotion of crime, self-harm or extremism
 
 The dataset is created in a manner that includes easy, medium and high difficulty domain requests.
+Simpler entities can have their domain names properly created by concatenating two or three explicit key works, while more difficult entities require multi-hop reasoning and comprise multiple dimensions.
 
-## My pipeline
+For example, to create a domain name for "Healthtech platform enabling remote physiotherapy programs", you cannot simple combine the word "heath" abd "physiotherapy", but using more inspring wording. 
+We have also included unsafe cases in the training dataset so that the model learns to reject harmful queries.
+
+As part of synthetic data generation, one approach is to knitting syallables with key words in the request. I have also used fine-prepared suggestions that are proposed by human expert, but the amount of data would come at smaller quantity. 
+
+## Model pipeline
 
 1. Formulate the basic model structure and training module
 2. Run Evaluation, Observe and make necessary adaptations
