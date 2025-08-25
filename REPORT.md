@@ -11,6 +11,8 @@ A domain name has to satisfy the following criteria:
 5. Audience and Culture Fit
 6. Safety & Compliance: no trademark violation, no promotion of crime, self-harm or extremism
 
+The dataset is created in a manner that includes easy, medium and high difficulty domain requests.
+
 ## My pipeline
 
 1. Formulate the basic model structure and training module
