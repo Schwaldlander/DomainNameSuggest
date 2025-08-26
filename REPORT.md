@@ -47,6 +47,10 @@ The **pipeline** is as follows:
 Particularly, v2 feeds more examples than v1, and the model output becomes more satisfying.
 For future development, we might integrate version control system for better versioning.
 
+### Data Aggregation
+
+Given business seeds of 18 topics, we combine it with different tld, length requirements, etc, thereby generating more than 800 items of training dataset. 
+
 ### HyperParameters
 
 MAX_NEW_TOKENS
@@ -155,20 +159,20 @@ refusal for 'too_long'
 **Solution:** Meta model performs better in avoiding hypens as well. In case of hypen/space appearance, we can force remove such tokens.
 
  - 4. Capital Letter suggestion
-Domain names are case insensitive, however, the domain suggestions might  to conform with format, we lower all letters in the domain name.
-
-**Solution:** not vital issue
+    Domain names are case insensitive, however, the domain suggestions might  to conform with format, we lower all letters in the domain name.
+    
+    **Solution:** not vital issue
 
  - 5. Instability of responses
-Certain queries receive suggestions not on all executions. This is evident when model.eval() is not activated.
-
-**Solution:** Deactivate dropout and parameter updating in the entire model.
+    Certain queries receive suggestions not on all executions. This is evident when model.eval() is not activated.
+    
+    **Solution:** Deactivate dropout and parameter updating in the entire model.
 
  - 6. Generic Suggestion
 
-Some domain suggestions include health.io, online.ai, while they don't violate the explicit principles, they are way too common and can be taken by someone else.
-
-**Solution:** Add uniqueness requirement in evaluation prompts
+    Some domain suggestions include health.io, online.ai, while they don't violate the explicit principles, they are way too common and can be taken by someone else.
+    
+    **Solution:** Add uniqueness requirement in evaluation prompts
 
 
 
