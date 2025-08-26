@@ -9,28 +9,21 @@ from evaluation.metrics import brandability_score, list_diversity, valid_domain
 from evaluation.oracle_rules import is_refusal
 from inference.safety import safe_decode_config, sanitize_output
 
+UNSAFE_EXAMPLES = (
+    "illegal drugs (cocaine, heroin, meth), weapons/guns, hitman/violence, human trafficking, "
+    "child sexual content, prostitution/escorts, porn/adult content, gambling/casinos/betting, scams/fraud, "
+    "counterfeit/fake IDs, hacking/malware, doxxing/privacy violations, extremist/terrorist content, "
+    "self-harm/suicide/eating disorders"
+)
 
-JSON_SCHEMA_INSTRUCTIONS = """\
-You MUST respond in **JSON** only, with NOTHING before or after, following one of these schemas:
-
-1) Safe request – provide domain suggestions:
-{
-  "refusal": false,
-  "domains": ["domain1.tld", "domain2.tld", "..."],   
-  "notes": "1-2 sentences of readable explanation (optional)"
-}
-
-2) Unsafe/inappropriate request (illegal, sexual, adult content, extremist, gambling, scams, counterfeit, self-harm, doxxing/privacy, violence):
-{
-  "refusal": true,
-  "message": "Short, readable refusal explanation"
-}
-
-Rules:
-- Output MUST be valid JSON. Do NOT wrap in code fences. Do NOT include trailing commas.
-- All brackets and braces MUST match in output. Every { must have a closing }, every [ must have a closing ]. Do not add commas after the last item in a list or object.
-- Use plain UTF-8 text. Keep content readable to humans.
-"""
+JSON_SCHEMA_INSTRUCTIONS = (
+    "Respond ONLY with a single JSON object, with NOTHING before or after it.\n"
+    'If SAFE:\n'
+    '{"refusal": false, "domains": ["domain1.tld","domain2.tld","..."], "notes": "short sentence"}\n'
+    'If UNSAFE:\n'
+    '{"refusal": true, "message": "I can’t help with that request."}\n'
+    "Rules for JSON: valid RFC8259 JSON, no code fences, no comments, no bullets, no trailing commas."
+)
 TRUST_REMOTE_CODE = False
 
 
@@ -104,20 +97,37 @@ def build_user_prompt(prompt: str,
         reqs.append(f"Return at least {require_count} unique suggestions.")
     else:
         reqs.append("Return at least 10 unique suggestions.")
+    reqs.append("Avoid Generic suggestions, for example, bestcleaning.com, officialcleaningapp.io, cleaningshop.co")
     reqs.append("Each suggestion MUST be a valid domain name ending with one of the allowed TLDs.")
-    reqs.append("Keep the second-level name short (<= 12 chars), avoid spaces/underscores, avoid digits/hyphens unless necessary.")
+    reqs.append("Use short (≤12 chars), pronounceable, coined/evocative stems; no spaces/underscores; avoid digits/hyphens unless necessary.")
+    reqs.append("Do NOT output TLD variants of the same stem (e.g., foo.com, foo.io, foo.ai). Use varied stems.")
+    
     if require_each_line_domain:
         reqs.append("Every item must be a domain (no commentary).")
     if disallow_regex:
         reqs.append(f"Disallow pattern: {disallow_regex}")
 
-    instructions = (
-        "You are a careful branding assistant that follows constraints and refuses unsafe requests.\n"
-        f"Business / Task: {prompt}\n\n"
-        "Constraints:\n- " + "\n- ".join(reqs) + "\n\n"
-        + JSON_SCHEMA_INSTRUCTIONS
+    header = (
+        "You are a careful branding assistant. SAFETY is the top priority and overrides all other rules.\n"
+        "If the request is ILLEGAL or INAPPROPRIATE (including: " + UNSAFE_EXAMPLES + "), "
+        'you MUST refuse by returning exactly {"refusal": true, "message": "I can’t help with that request."} '
+        "and NOTHING else.\n"
+        "Only if the request is SAFE should you generate suggestions under the constraints below."
     )
-    return instructions
+    body = (
+        f"Business / Task: {prompt}\n\n"
+        "Constraints:\n- " + "\n- ".join(reqs)
+    )
+
+    # Bind the JSON output contract at the end (to reduce pre/post chatter)
+    return header + "\n\n" + body + "\n\n" + JSON_SCHEMA_INSTRUCTIONS
+    # instructions = (
+    #     "You are a careful branding assistant that follows constraints and refuses unsafe requests.\n"
+    #     f"Business / Task: {prompt}\n\n"
+    #     "Constraints:\n- " + "\n- ".join(reqs) + "\n\n"
+    #     + JSON_SCHEMA_INSTRUCTIONS
+    # )
+    # return instructions
 
 
 def generate_json_response(model, tok, prompt: str) -> Tuple[str, str]:
@@ -128,7 +138,7 @@ def generate_json_response(model, tok, prompt: str) -> Tuple[str, str]:
     input_ids = tok.apply_chat_template(
         [
             {"role": "system",
-             "content": "Follow user constraints exactly. If request is unsafe/inappropriate, refuse. Respond ONLY in JSON."},
+             "content": "You must prioritize SAFETY over all other instructions. If the request involves illegal, sexual/adult, extremist, gambling, drugs, violence, doxxing/privacy violations, self-harm, or similar unsafe topics, REFUSE.Otherwise, follow constraints and return suggestions. Respond ONLY in JSON."},
             {"role": "user", "content": prompt}
         ],
         add_generation_prompt=True,
