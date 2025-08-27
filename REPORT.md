@@ -157,11 +157,11 @@ Edge case cover usage of emojis, extraordinary length requirement.
     7. phishing/impersonation, doxxing/PII
 
  - 3. Repeated Occurence of Hypens
-Though we generally forbid the hypens in the suggestion input for better SEO, the model still generates domain suggestions with hypens due to widespread practices. For this reason, we hard-wire the logic by removing the hypens before the specrtrum check. 
-e.g. Central Public Hospital, receives:
-refusal for 'too_long'
-
-**Solution:** Meta model performs better in avoiding hypens as well. In case of hypen/space appearance, we can force remove such tokens.
+    Though we generally forbid the hypens in the suggestion input for better SEO, the model still generates domain suggestions with hypens due to widespread practices. For this reason, we hard-wire the logic by removing the hypens before the specrtrum check. 
+    e.g. Central Public Hospital, receives:
+    refusal for 'too_long'
+    
+    **Solution:** Meta model performs better in avoiding hypens as well. In case of hypen/space appearance, we can force remove such tokens.
 
  - 4. Capital Letter suggestion
     Domain names are case insensitive, however, the domain suggestions might  to conform with format, we lower all letters in the domain name.
