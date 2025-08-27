@@ -96,10 +96,13 @@ When r = 32,  lr = 8e-5, epochs = 3,
 
 ### SfT vs DPO
 
-We find that with similar dataset generation techniques, SfT performs on par with DPO. Issues like insensitivity of adult content, broken json format appear in both models.
+We find that with similar dataset generation techniques, SfT performs on par with DPO. Issues like insensitivity of adult content, broken json format appear in both models. However, for future extension, it would be more interesting to probe into DPO.
+
+Due to GPU usage constraint on Colab platform, we cannot proceed with too many experiments.
 
 ## Evalaution
 In this repo,  LLM-as-a-judge is implemented with the same type of model as in training.
+It harnesses **hard criteria** like vowel composition, string length and **soft standrads** like LLM prompt returns a score on appropriateness of domain suggestions and highlights **specificity vs genericity** of domain names. 
 Our evaluation covers similar topics as in training dataset.
 Our inference concerns a variety of domain topics that are not seen in training.
 
@@ -121,11 +124,12 @@ Edge case cover usage of emojis, extraordinary length requirement.
 ### Underperformance Cases
 
 - 1. Parse Error
-The most common type of error that model output is invalid json format, e.g. brackets{([ fail to match or close.
-Besides, irregular symbol such as im_end still persists.
-
-**Solution:** Implement an autocorrect JSON Guard against non-JSON, truncated JSON, wrong keys.
- 
+    The most common type of error that model output is invalid json format, e.g. brackets{([ fail to match or close.
+    Besides, irregular symbol such as im_end still persists.
+    
+    **Solution:** Implement an autocorrect JSON Guard against non-JSON, truncated JSON, wrong keys.
+    By specifying RFC8259 JSON, no code fences, no comments, no bullets, no trailing commas, erratic json effectively reduced from 50% of cases to near zero.
+     
 
  - 2. Inappropriate reaction on Security
 
@@ -140,7 +144,7 @@ Besides, irregular symbol such as im_end still persists.
     
     Clarify **Harmful Content Refusal** policy, filter out prior to prompt. [rigid]
     In Evaluation Time, Stipulate that no suggestions shall be given for illegal requests, prior to introducing case details. [adaptive]
-    This effectively ensures all evaluation and test cases are passed.
+    This effectively ensures all evaluation and test cases are passed. Before adopting this prompt, the model always fail to identify at least 75% of dangerous requests. With this prompt, it always identifies almost 100% of the dangerous cases.
     
     The LLM inherent capacity enables identification of harmful content. It attaches reason of refusal in returning response. 
     Categories refused include:
