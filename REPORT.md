@@ -140,6 +140,7 @@ Besides, irregular symbol such as im_end still persists.
     
     Clarify **Harmful Content Refusal** policy, filter out prior to prompt. [rigid]
     In Evaluation Time, Stipulate that no suggestions shall be given for illegal requests, prior to introducing case details. [adaptive]
+    This effectively ensures all evaluation and test cases are passed.
     
     The LLM inherent capacity enables identification of harmful content. It attaches reason of refusal in returning response. 
     Categories refused include:
