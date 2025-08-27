@@ -1,0 +1,8 @@
+{
+  "seed": 2025,
+  "pairs": 848,
+  "policy_model": "/content/drive/MyDrive/domain-suggester-llm/deployment/model_hugging",
+  "use_lora": false,
+  "load_4bit": true,
+  "source": "builder"
+}
