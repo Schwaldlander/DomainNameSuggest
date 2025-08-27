@@ -24,7 +24,7 @@ python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-> You need a GPU, otherwise with CPU it would be slower.
+> You need a GPU, BF16 and some pretrained models are not supported with CPU.
 
 ### 1) Create Synthetic Dataset
 ```bash
@@ -55,7 +55,7 @@ python training/train_sft.py   --base_model meta-llama/Llama-3.2-3B-Instruct   -
 
 ### 3) Evaluate (spec tests + metrics)
 ```bash
-python evaluation/evaluate.py   --model runs/llama3.2-3b-lora-v1   --device cuda   --report runs/llama3.2-3b-lora-v1/eval_report.json
+python evaluate.py   --model runs/llama3.2-3b-lora-v1   --device cuda   --report runs/llama3.2-3b-lora-v1/eval_report.json
 ```
 
 This runs:
@@ -108,6 +108,6 @@ Every run writes a `metadata.json` with hyperparams and hashes for reproducibili
 ---
 
 ## Notes
-- You must comply with your base model license terms. Log into your own hugging face account and register for approval of using MistralAI and llama model.
-- For large-scale training, consider gradient checkpointing, 4/8-bit, and FSDP in `configs/training_lora.yaml`.
-- Replace or grow the synthetic dataset with curated, real-world data when possible—but **keep safety** front-and-center.
+- You must comply with your base model license terms. Log into your own hugging face account and register for organisation approval of using MistralAI and llama model.
+- For large-scale training, consider gradient checkpointing, 4/8-bit, and FSDP in `configs/training_lora.yaml` for computation efficency.
+- Replace or grow the synthetic dataset with curated, real-world data when possible.
