@@ -8,7 +8,11 @@ Other models such as **Qwen2.5-3B-Instruct**, **mistralai/Mistral-7B-Instruct-v0
 
 This repo includes LoRA-based fine-tuning, spec-style tests, safety-first decoding, an optional **cross-encoder reranker** for brandability, and **MMR** post-processing for diversity.
 
+If you want to run the repository on Colab, upload the folder and its files to Google Drive, then use the **Execute_Command.ipynb**
 
+For technical documentation, see **REPORT.md**
+
+For guidance on versioning, see **VERSIONING.md**
 
 > Tip: If time-constrained, focus on the **evaluation & improvement loop**: run the spec tests, add negative/positive contrastive pairs into SFT data, and iterate decoding/reranking/MMR before you do long trainings.
 
