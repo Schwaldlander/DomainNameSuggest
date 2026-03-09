@@ -56,6 +56,7 @@ To try **full fine-tuning** (expensive):
 ```bash
 python training/train_sft.py   --base_model meta-llama/Llama-3.2-3B-Instruct   --train_jsonl data/synthetic/sft_dataset.jsonl   --output_dir runs/llama3.2-3b-full-v1   --config configs/training_full.yaml   --no_lora
 ```
+While SfT is instrumental in adapting the model to the general context of the task, DPO is advised after the SfT step to align perferenes. Note that the necessity of DPO depends on the quality of SFT data and the specific requirements of the task, as high-quality SFT alone can sometimes suffice."
 
 ### 3) Evaluate (spec tests + metrics)
 ```bash
